@@ -2,6 +2,9 @@ services:
   api:
     build: .
     ports:
-      - '8100:8100'
+      - '${PORT:-8100}:8100'
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8100
     volumes:
       - ./data:/app/data # Persist the SQLite database

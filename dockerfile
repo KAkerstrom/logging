@@ -1,17 +1,19 @@
-# Use an official Python image
+# Use Python image as the base
 FROM python:3.13.2
 
 # Set the working directory in the container
 WORKDIR /app
 
 # Copy the project files into the container
-COPY . .
+COPY ./server ./server
 
 # Install dependencies
-RUN pip install --no-cache-dir fastapi uvicorn sqlalchemy
+# fastapi uvicorn sqlalchemy
+RUN pip install --no-cache-dir -r ./server/requirements.txt
 
 # Expose the port FastAPI runs on
-EXPOSE 8100
+EXPOSE ${PORT:-8100}
 
 # Command to run the API server
-CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8100"]
+#RUN python ./server/server.py
+CMD uvicorn server.server:app --host ${HOST:-0.0.0.0} --port ${PORT:-8100}
