@@ -262,7 +262,7 @@ def get_event(property_id: int, event_id: int, db: Session = Depends(get_db)):
 def delete_event(property_id: int, event_id: int, db: Session = Depends(get_db)):
     """Permanently delete an event from the database."""
     log = (
-        db.query(Property)
+        db.query(Log)
         .filter(Log.propertyId == property_id and Log.id == event_id)
         .first()
     )
