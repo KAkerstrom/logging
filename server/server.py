@@ -179,7 +179,7 @@ def get_property_events(
     if start_date:
         parsed_start = validateDateTime(start_date, time.min)
         if parsed_start:
-            query = query.filter(Log.Timestamp >= parsed_start)
+            query = query.filter(Log.timestamp >= parsed_start)
         else:
             raise HTTPException(
                 status_code=400,
@@ -189,7 +189,7 @@ def get_property_events(
     if end_date:
         parsed_end = validateDateTime(end_date, time.max)
         if parsed_end:
-            query = query.filter(Log.Timestamp >= parsed_end)
+            query = query.filter(Log.timestamp >= parsed_end)
         else:
             raise HTTPException(
                 status_code=400,
